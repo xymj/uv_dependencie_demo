@@ -5,16 +5,18 @@ import uvicorn
 
 
 
-def main():
-    print("Hello from uv-dependencie-demo!")
-    print(date.today())
 
 app = FastAPI()
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
+# [project.scripts]脚本执行入口
+def main() -> None:
+    print("Hello from uv-dependencie-demo!")
+    print(date.today())
+    uvicorn.run(app)
+
 if __name__ == "__main__":
     main()
-    uvicorn.run(app)
 

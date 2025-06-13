@@ -3,6 +3,7 @@
 
 ## 新建一个uv项目
 1. uv init uv_dependencie_demo  项目初始化
+   uv init --package my_mcp_server
 2. cd uv_dependencie_demo  进入项目目录
 3. uv add "fastapi"  添加依赖包，内容会出现在pyproject.toml的dependencies中
 4. pip install "fastapi"  安装依赖包
@@ -20,6 +21,38 @@
 
 ## uv项目启动
 1. uv run main.py
+
+
+## uv构建分发包
+1. 使用 uv 构建 .tar.gz（源码包）和 .whl（wheel 包）：
+    ```bash
+    # 构建源码包和 wheel 包
+    uv build --sdist --wheel
+    ```
+    输出路径：生成的包会位于 dist/ 目录下
+2. 安装 twine 并上传到 PyPI 
+   uv add twine
+3. 安装 twine 并上传到 PyPI 
+   1. 安装 twine： uv add twine 
+   2. 上传到 PyPI： twine upload dist/*
+      1. 首次上传时需输入 PyPI 账户的 API Token 或密码。 
+      2. 推荐使用 API Token： 登录 PyPI，生成 API Token（账号设置页面）。 
+      3. 使用 __token__ 作为用户名，Token 作为密码： twine upload dist/* -u __token__ -p <your_api_token>
+4. 安装包运行
+   1. 使用pip
+      pip install uv-dependencie-demo   安装
+      python -m uv_dependencie_demo.main  执行
+      pip uninstall uv-dependencie-demo 卸载
+      2. 使用uv执行
+         uv pip install uv-dependencie-demo
+         需指定了[project.scripts]，直接执行 uv run uv_dependencie_demo
+         注意需要添加指定脚本的入口函数 def main() -> None:
+            ```bash
+            [project.scripts]
+            uv_dependencie_demo = "uv_dependencie_demo.main:main"
+            ```
+
+
 
 
 ## uv使用详细流程
