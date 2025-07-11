@@ -17,7 +17,9 @@ requires-python = ">=3.12"
 #内置对异步框架（如 FastAPI、Starlette）的支持，依赖 asyncio 和 uvloop 提升性能 。
 #FastAPI 默认基于 Starlette 和 Uvicorn 构建，因此 Uvicorn 通常与这些框架协同工作 。
 dependencies = [
+    "dashscope>=1.23.8",
     "fastapi>=0.115.12",
+    "openai>=1.95.0",
     "twine>=6.1.0",
     "uvicorn>=0.34.3",
 ]
